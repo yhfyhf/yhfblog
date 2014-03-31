@@ -1,0 +1,40 @@
+#contents {
+	margin-left: 10%;
+	width: 80%;
+	font-family: monospace;
+	font-size: 120%;
+}
+
+#add_post {
+	margin-left: 10%;
+	width: 80%;
+}
+
+#add_post td {
+	padding: 5px;
+}
+
+#add_post tr {
+	vertical-align: top;
+}
+
+#input_title {
+	width: 100%;
+}
+
+#input_content {
+	width: 900px;
+	height: 200px;
+}
+
+a:hover {
+	color: #428bca;
+}
+
+a {
+	color: black;
+}
+
+.col-md-5 {
+	cursor: pointer;
+}
