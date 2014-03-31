@@ -1,0 +1,26 @@
+
+.btn-group {
+	margin-left: 3%;
+	margin-top: 3%;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.content {
+	text-align: center;
+	margin-top: 20%;
+}
+
+h1 {
+	font-size: 80px;
+	font-family: "Courier New", monospace;
+}
+
+.intro {
+	font-size: 40px;
+}
+
+footer {
+	text-align: center;
+	margin-top: 15%;
+}

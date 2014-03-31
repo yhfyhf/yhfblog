@@ -1,45 +1,55 @@
 $def with (posts, form)
 $var cssfiles: static/style.css
 
-<div id="contents">
-	<tr>
-		<th>My Post:</th>
-	</tr>
 
-	<ul>
-		$for post in posts:
-			<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[1].replace(" ","")">$post[1]</a></div>
-			<div class="col-md-2 col-md-offset-2">$post[3]</div>
-			<form id="delete" action="/del/$post[0]" method="post">
-			 	<input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="confirm_del()">
-			 	<script>
-			 	 	function confirm_del() {
-			 	 		if (confirm("Are you sure to delete this post?"))	
-			 	 			document.getElementById("delete").submit();
-			 	 	}
-			 	</script>
-			</form>
-
-			<div class="modal fade" id="$post[1].replace(" ","")" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">$post[1]</h4>
-						</div>
-						<div class="modal-body">$post[2]</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div><!-- /.modal-content -->
-				</div><!-- /.modal-dialog -->
-			</div><!-- /.modal -->
+<h1>Ying Haofei's Oasis <small>Talk is cheap.</small> </h1>
+<br>
+<div class="nav-div">
+	<ul class="nav nav-tabs">    <!-- 导航 -->
+		<li><a href="home.html" class="glyphicon glyphicon-home">&nbsp;<strong>Home</strong></a></li>
+		<li class="active"><a href="#" class="glyphicon glyphicon-book">&nbsp;<strong>Blogs</a></strong></li>
+		<li><a href="about.html" class="glyphicon glyphicon-user">&nbsp;<strong>About</a></strong></li>
+		<li><a href="" class="glyphicon glyphicon-star">&nbsp;<strong>RSS</a></strong></li>
 	</ul>
 </div>
 
-<form id="add_post" action="" method="post">
-$:form.render()
-</form>
+<br>
 
+<div class="container well">
+$for post in posts:
+	<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
+	<div class="col-md-2"></div>
+	<div class="col-md-2">$post[3]</div>
+	<div class="col-md-2">
+	<form id="delete$post[0]" action="/del/$post[0]" method="post">
+	 	<input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="confirm_del()">
+	 	<script>
+	 	 	function confirm_del() {
+	 	 		if (confirm("Are you sure to delete this post?"))	
+	 	 			document.getElementById("delete$post[0]").submit();
+	 	 	}
+	 	</script>
+	</form>
+	</div>
+	<div class="modal fade" id="$post[0]" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">$post[1]</h4>
+				</div>
+				<div class="modal-body">$:post[2].replace('\n', "<br>")</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+</div>
+<br><hr>
+<form id="add_post" action="" method="post">		
+	$:form.render()
+</form>
+<script src="/static/tab.js"></script>
 
 

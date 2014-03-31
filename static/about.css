@@ -1,0 +1,46 @@
+.btn-group {
+	opacity: 0.8;
+	margin-left: 3%;
+	margin-top: 3%;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.about {
+	text-align: center;
+	padding-top: 10%;
+}
+
+.intro {
+	margin-top: 5%;
+	font-family: Consolas,Monaco,'Andale Mono',monospace;
+	font-size: 20px;
+	font-color: black;
+	text-align: center;
+}
+
+@media screen and (min-width:640px){
+	.intro {
+		margin-left: 25%;
+		width: 50%;
+	}
+}
+
+@media screen and (max-width:640px) {
+	.intro {
+		margin-left: 10%;
+		width: 80%;
+	}
+}
+
+@media screen and (max-height: 480px) {
+	.intro {
+		margin-left: 10%;
+		width: 80%;
+	}
+}
+
+footer {
+	text-align: center;
+	margin-top: 25%;
+}

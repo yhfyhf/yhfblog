@@ -6,15 +6,17 @@ import sae.const
 
 urls = (
 	'/', 'Index',
+	'/index.html', 'Index',
 	'/del/(\d+)', 'Delete',
+	'/home.html', 'Home',
+	'/about.html', 'About',
 	'/login', 'Login',
     '/logout', 'Logout'
 )
+
 app = web.application(urls, globals()) 
 
-
 web.config.debug = False
-
 db = web.database(dbn='mysql', host=sae.const.MYSQL_HOST,port=int(sae.const.MYSQL_PORT),user=sae.const.MYSQL_USER, pw=sae.const.MYSQL_PASS, db=sae.const.MYSQL_DB) 
 
 store = web.session.DBStore(db, 'sessions') 
@@ -23,6 +25,14 @@ session = web.session.Session(app, store)
 
 
 render = web.template.render('templates', base='base')
+
+class Home:
+	def GET(self):
+		return render.home()
+
+class About:
+	def GET(self):
+		return render.about()
 
 class Login:
     form = web.form.Form(
@@ -43,7 +53,7 @@ class Login:
         	session.logged_in = True
         	raise web.seeother('/')
         else:
-        	return "Wrong Password!"
+        	return "wrong"
 
 class Logout:
     def GET(self):
@@ -52,9 +62,9 @@ class Logout:
 
 class Index:
 	form = web.form.Form(
-		web.form.Textbox('title', web.form.notnull, description="Title:", id="input_title"),
-		web.form.Textarea('content', web.form.notnull, description="Content:", id="input_content"),
-		web.form.Button('Add'),
+		web.form.Textbox('title', web.form.notnull, placeholder="Title:", id="input_title"),
+		web.form.Textarea('content', web.form.notnull, placeholder="Content:", id="input_content"),
+		web.form.Button('POST'),
 	)
 
 	def GET(self):
@@ -65,7 +75,7 @@ class Index:
 	def POST(self):
 		form = self.form()
 		if not session.get('logged_in', False):
-			return "You are not logged in!"
+			raise web.seeother('/login')
 		else:
 			if not form.validates():
 				posts = model.get_posts()
@@ -80,6 +90,6 @@ class Delete:
 			model.del_post(id)
 			raise web.seeother('/')
 		else:
-			return "You are not logged in!"
+			raise web.seeother('/login')
         
 application = sae.create_wsgi_app(app.wsgifunc()) 
