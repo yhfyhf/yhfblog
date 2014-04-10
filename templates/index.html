@@ -1,15 +1,21 @@
-$def with (posts, form)
+$def with (posts, form, logged)
 $var cssfiles: static/style.css
 
+<div class="log">
+	$if not logged:
+		<a href="login">Login</a>
+	$else:
+		<a href="logout">Logout</a>
+</div>
 
 <h1>Ying Haofei's Oasis <small>Talk is cheap.</small> </h1>
 <br>
 <div class="nav-div">
 	<ul class="nav nav-tabs">    <!-- 导航 -->
 		<li><a href="home.html" class="glyphicon glyphicon-home">&nbsp;<strong>Home</strong></a></li>
-		<li class="active"><a href="#" class="glyphicon glyphicon-book">&nbsp;<strong>Blogs</a></strong></li>
-		<li><a href="about.html" class="glyphicon glyphicon-user">&nbsp;<strong>About</a></strong></li>
-		<li><a href="" class="glyphicon glyphicon-star">&nbsp;<strong>RSS</a></strong></li>
+		<li class="active"><a href="#" class="glyphicon glyphicon-book">&nbsp;<strong>Blogs</strong></a></li>
+		<li><a href="about.html" class="glyphicon glyphicon-user">&nbsp;<strong>About</strong></a></li>
+		<li><a href="" class="glyphicon glyphicon-star">&nbsp;<strong>RSS</strong></a></li>
 	</ul>
 </div>
 
@@ -17,20 +23,30 @@ $var cssfiles: static/style.css
 
 <div class="container well">
 $for post in posts:
-	<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
-	<div class="col-md-2"></div>
-	<div class="col-md-2">$post[3]</div>
-	<div class="col-md-2">
-	<form id="delete$post[0]" action="/del/$post[0]" method="post">
-	 	<input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="confirm_del()">
-	 	<script>
-	 	 	function confirm_del() {
-	 	 		if (confirm("Are you sure to delete this post?"))	
-	 	 			document.getElementById("delete$post[0]").submit();
-	 	 	}
-	 	</script>
-	</form>
-	</div>
+	$if logged:
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
+			<div class="col-md-2"></div>
+			<div class="col-md-2">$post[3]</div>
+			<div class="col-md-2">	
+				<form id="delete$post[0]" action="/del/$post[0]" method="post">
+				 	<input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="confirm_del()">
+				 	<script>
+				 	 	function confirm_del() {
+				 	 		if (confirm("Are you sure to delete this post?"))	
+				 	 			document.getElementById("delete$post[0]").submit();
+				 	 	}
+				 	</script>
+				</form>
+			</div>
+		</div>
+	$else:
+		<div class="row">
+			<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
+			<div class="col-md-2 col-md-offset-4">$post[3]</div>
+		</div>
+		
+
 	<div class="modal fade" id="$post[0]" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -47,9 +63,11 @@ $for post in posts:
 	</div><!-- /.modal -->
 </div>
 <br><hr>
-<form id="add_post" action="" method="post">		
-	$:form.render()
-</form>
+$if logged:
+	<form id="add_post" action="" method="post">		
+		$:form.render()
+	</form>
 <script src="/static/tab.js"></script>
+
 
 
