@@ -9,8 +9,11 @@ $def with (page)
 	<script src="http://cdn.bootcss.com/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 	<link rel="stylesheet" type="text/css" href="$page.cssfiles">
+
+	<link rel="stylesheet" href="static/prettify.css">
+	<script src="/static/prettify.js"></script>
 </head>
-<body>
+<body onload="prettyPrint()">
 $:page
 </body>
 
