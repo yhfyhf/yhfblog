@@ -10,6 +10,11 @@ h1 {
 	font-size: 120%;
 }
 
+.log {
+	float: right;
+	margin-right: 15px;
+}
+
 .container {
 	font-family: monospace;
 	font-size: 20px;
@@ -66,10 +71,15 @@ a:link, a:visited, a:hover {
 
 a:hover {
 	color: #428bca;
+	cursor: pointer;
 }
 
 a {
 	color: black;
+}
+
+.row {
+	margin-top: 6px;
 }
 
 .col-md-2 {
@@ -84,4 +94,9 @@ footer {
 
 th {
 	display: none;
+}
+
+.log_form {
+	margin-left: 40%;
+	margin-top: 10%;
 }
