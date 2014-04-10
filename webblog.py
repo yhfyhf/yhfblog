@@ -63,7 +63,10 @@ class Index:
 	def GET(self):
 		posts = model.get_posts()
 		form = self.form()
-		return render.index(posts, form)
+		logged = False
+		if session.get('logged_in', False):
+			logged = True
+		return render.index(posts, form, logged)
 
 	def POST(self):
 		form = self.form()
