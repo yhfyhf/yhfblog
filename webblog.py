@@ -1,6 +1,16 @@
+# -*- encoding: utf-8 -*-
 import web
 import model
+from douban_client import DoubanClient
+import requests
 from datetime import *
+
+
+API_KEY = '08aa62863edf44a419ff2792bc9dcdec'
+API_SECRET = 'e7db97b2e66fcfb4'
+CALLBACK = "http://localhost:8080"
+SCOPE = 'douban_basic_common,shuo_basic_r,shuo_basic_w'
+client = DoubanClient(API_KEY, API_SECRET, CALLBACK, SCOPE)
 
 urls = (
 	'/', 'Index',
@@ -9,7 +19,7 @@ urls = (
 	'/home.html', 'Home',
 	'/about.html', 'About',
 	'/login', 'Login',
-    '/logout', 'Logout'
+	'/logout', 'Logout'
 )
 
 web.config.debug = False
@@ -35,8 +45,9 @@ class Login:
 	)
 
     def GET(self):
-    	form = self.form()
-    	return render.login(form)
+    	# form = self.form()
+    	# return render.login(form)
+    	raise web.seeother(client.authorize_url)
 
     def POST(self):
     	form = self.form()
@@ -61,6 +72,28 @@ class Index:
 	)
 
 	def GET(self):
+		if not web.input() or str(web.input()) == "<Storage {'error': u'access_denied'}>":
+			pass
+		else:
+			code = str(web.input())[20: -3]
+			login_data = { 'client_id': API_KEY, 
+			 			       'client_secret': API_SECRET,
+			 			       'redirect_uri': CALLBACK,
+			 			       'grant_type': 'authorization_code',
+			 			       'code': code }
+
+			r = requests.post("https://www.douban.com/service/auth2/token", data=login_data)
+			access_token =  eval(r.text)['access_token']
+			headers = {"Authorization": "Bearer "+access_token}
+			r = requests.get("https://api.douban.com/v2/user/~me", headers=headers)
+			str_user_info = r.text.encode('utf8')
+			douban_username = str_user_info.split('\"')[7]
+			if douban_username == 'Havlicek':
+				session.logged_in = True
+				raise web.seeother('/')
+			else:
+			 	return '对不起, 您没有登录该博客的权限。'.decode('utf8').encode('utf8')
+
 		posts = model.get_posts()
 		form = self.form()
 		logged = False
