@@ -3,12 +3,12 @@ $var cssfiles: static/style.css
 
 <div class="log">
 	$if not logged:
-		<a href="login">Login</a>
+		<a href="login"><img src="http://img3.douban.com/pics/douban-icons/login_with_douban_32.png" alt="douban_login"></a>
 	$else:
 		<a href="logout">Logout</a>
 </div>
 
-<h1>Ying Haofei's Oasis <small>Talk is cheap.</small> </h1>
+<h1>Ying Haofei's Oasis<small>Talk is cheap.</small> </h1>
 <br>
 <div class="nav-div">
 	<ul class="nav nav-tabs">    <!-- 导航 -->
@@ -52,7 +52,7 @@ $for post in posts:
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">$post[1]</h4>
+					<h4 class="modal-title" id="myModalLabel">$post[1] <a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',w=450,h=330,x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width='+w+',height='+h+',left='+(screen.width-w)/2+',top='+(screen.height-h)/2))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src="http://img2.douban.com/pics/fw2douban1.png" alt="推荐到豆瓣" /></a></h4>
 				</div>
 				<div class="modal-body">$:post[2].replace('\n', "<br>")</div>
 				<div class="modal-footer">
