@@ -1,5 +1,5 @@
 h1 {
-	margin-left: 10%;
+	margin-left: 15%;
 	font-weight: bold;
 	color: #a00;
 }
@@ -15,7 +15,7 @@ h1 {
 	margin-right: 15px;
 }
 
-.page {
+.container {
 	font-family: monospace;
 	font-size: 20px;
 	margin-left: 10%;
@@ -23,26 +23,12 @@ h1 {
 }
 
 .well {
-	width: 90%;
-	margin: auto;
-	margin-top: 20px;
 	background-color: white;
-	box-shadow: 8px 6px 5px #888888;
+	box-shadow: 10px 10px 5px 5px #888888;
 }
-
-.date {
-	font-size: 70%;
-	color: gray;
-}
-
-pre {
-	width: 80%;
-}
-
 
 @media screen and (max-width:640px){
-	.page {
-		margin-left: 0;
+   	.well {
 		width: 100%;
 	}
 
@@ -52,6 +38,11 @@ pre {
 }
 
 @media screen and (min-width:640px){
+	.well {
+		width: 80%;
+		max-width: 1200px;
+	}
+
 	#add_post {
 		width: 80%;
 		max-width: 1200px;
