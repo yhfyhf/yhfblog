@@ -15,52 +15,23 @@ $var cssfiles: static/style.css
 		<li><a href="home.html" class="glyphicon glyphicon-home">&nbsp;<strong>Home</strong></a></li>
 		<li class="active"><a href="#" class="glyphicon glyphicon-book">&nbsp;<strong>Blogs</strong></a></li>
 		<li><a href="about.html" class="glyphicon glyphicon-user">&nbsp;<strong>About</strong></a></li>
-		<li><a href="" class="glyphicon glyphicon-star">&nbsp;<strong>RSS</strong></a></li>
+		<li><a href="archive.html" class="glyphicon glyphicon-star">&nbsp;<strong>Archive</strong></a></li>
 	</ul>
 </div>
 
 <br>
 
-<div class="container well">
+<div class="page">
 $for post in posts:
-	$if logged:
-		<div class="row">
-			<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
-			<div class="col-md-2"></div>
-			<div class="col-md-2">$post[3]</div>
-			<div class="col-md-2">	
-				<form id="delete$post[0]" action="/del/$post[0]" method="post">
-				 	<input class="btn btn-primary btn-sm" type="button" value="Delete" onclick="confirm_del()">
-				 	<script>
-				 	 	function confirm_del() {
-				 	 		if (confirm("Are you sure to delete this post?"))	
-				 	 			document.getElementById("delete$post[0]").submit();
-				 	 	}
-				 	</script>
-				</form>
-			</div>
+	<div class="well">
+		<div class="date">
+			Posted on $post[3]
 		</div>
-	$else:
-		<div class="row">
-			<div class="col-md-5 col-md-offset-1"><a data-toggle="modal" data-target="#$post[0]">$post[1]</a></div>
-			<div class="col-md-2 col-md-offset-4">$post[3]</div>
+		<div class="title">
+			<h2>$post[1]&nbsp;&nbsp;<a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',w=450,h=330,x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width='+w+',height='+h+',left='+(screen.width-w)/2+',top='+(screen.height-h)/2))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src="http://img2.douban.com/pics/fw2douban1.png" alt="推荐到豆瓣" /></a></h2>
 		</div>
-		
-
-	<div class="modal fade" id="$post[0]" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">$post[1] <a href="javascript:void(function(){var d=document,e=encodeURIComponent,s1=window.getSelection,s2=d.getSelection,s3=d.selection,s=s1?s1():s2?s2():s3?s3.createRange().text:'',r='http://www.douban.com/recommend/?url='+e(d.location.href)+'&title='+e(d.title)+'&sel='+e(s)+'&v=1',w=450,h=330,x=function(){if(!window.open(r,'douban','toolbar=0,resizable=1,scrollbars=yes,status=1,width='+w+',height='+h+',left='+(screen.width-w)/2+',top='+(screen.height-h)/2))location.href=r+'&r=1'};if(/Firefox/.test(navigator.userAgent)){setTimeout(x,0)}else{x()}})()"><img src="http://img2.douban.com/pics/fw2douban1.png" alt="推荐到豆瓣" /></a></h4>
-				</div>
-				<div class="modal-body">$:post[2].replace('\n', "<br>")</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+		$:post[2]
+	</div>
 </div>
 <br><hr>
 $if logged:
