@@ -17,14 +17,15 @@ client = DoubanClient(API_KEY, API_SECRET, CALLBACK, SCOPE)
 urls = (
 	'/', 'Index',
 	'/index.html', 'Index',
+    '/archive.html', 'Archive',
 	'/del/(\d+)', 'Delete',
 	'/home.html', 'Home',
 	'/about.html', 'About',
 	'/login', 'Login',
     '/logout', 'Logout'
 )
-app = web.application(urls, globals()) 
 
+app = web.application(urls, globals()) 
 
 web.config.debug = False
 
