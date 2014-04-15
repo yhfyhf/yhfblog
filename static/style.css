@@ -1,4 +1,4 @@
-h1 {
+.h1 {
 	margin-left: 10%;
 	font-weight: bold;
 	color: #a00;
@@ -24,7 +24,7 @@ h1 {
 
 .well {
 	width: 90%;
-	margin: auto;
+	margin-left: auto;
 	margin-top: 20px;
 	background-color: white;
 	box-shadow: 8px 6px 5px #888888;
@@ -37,6 +37,7 @@ h1 {
 
 pre {
 	width: 80%;
+	margin: auto;
 }
 
 
@@ -48,6 +49,14 @@ pre {
 
 	#add_post {
 		width: 95%;
+	}
+
+	.well {
+		width: 100%;
+	}
+
+	pre {
+		width: 100%;
 	}
 }
 
