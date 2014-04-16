@@ -17,20 +17,18 @@ client = DoubanClient(API_KEY, API_SECRET, CALLBACK, SCOPE)
 urls = (
 	'/', 'Index',
 	'/index.html', 'Index',
-    '/archive.html', 'Archive',
+        '/archive.html', 'Archive',
 	'/del/(\d+)', 'Delete',
 	'/home.html', 'Home',
 	'/about.html', 'About',
 	'/login', 'Login',
-    '/logout', 'Logout'
+        '/logout', 'Logout'
 )
 
 app = web.application(urls, globals()) 
 
 web.config.debug = False
-
 db = web.database(dbn='mysql', host=sae.const.MYSQL_HOST,port=int(sae.const.MYSQL_PORT),user=sae.const.MYSQL_USER, pw=sae.const.MYSQL_PASS, db=sae.const.MYSQL_DB) 
-
 store = web.session.DBStore(db, 'sessions') 
 session = web.session.Session(app, store) 
 
